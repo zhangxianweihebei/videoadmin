@@ -1,4 +1,6 @@
 package com.ld;
+import com.ld.controller.IndexController;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
