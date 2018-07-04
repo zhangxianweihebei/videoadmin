@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXListView prefHeight="800.0" prefWidth="200.0" />
+      <ImageView fitHeight="300.0" fitWidth="500.0" layoutX="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="300.0" fitWidth="500.0" layoutX="700.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="300.0" fitWidth="500.0" layoutX="200.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="300.0" fitWidth="500.0" layoutX="700.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXButton layoutX="235.0" layoutY="719.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: red;" text="上一个文件" />
+      <JFXButton layoutX="474.0" layoutY="725.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: red;" text="下一个文件" />
+      <JFXButton layoutX="706.0" layoutY="719.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: red;" text="移动文件" />
+      <JFXButton layoutX="936.0" layoutY="719.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: red;" text="删除文件" />
+   </children>
+</Pane>
