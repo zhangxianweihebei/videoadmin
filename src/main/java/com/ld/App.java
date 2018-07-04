@@ -1,9 +1,10 @@
 package com.ld;
-import com.ld.controller.IndexController;
+import com.ld.core.Lodding;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 public class App extends Application{
 
@@ -11,7 +12,9 @@ public class App extends Application{
 	@Override
 	public void start(Stage stage) throws Exception {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Index.fxml"));
-		Scene scene = new Scene(fxmlLoader.load());
+		Pane load = fxmlLoader.load();
+		Lodding.build().setPane(load);
+		Scene scene = new Scene(load);
 		stage.setScene(scene);
 		stage.show();
 	}
