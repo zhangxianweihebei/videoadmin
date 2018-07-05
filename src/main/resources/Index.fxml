@@ -16,8 +16,8 @@
       <ImageView fx:id="imageView_4" fitHeight="300.0" fitWidth="500.0" layoutX="700.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
       <JFXButton layoutX="210.0" layoutY="700.0" onAction="#del" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: red;" text="上一个文件" />
       <JFXButton layoutX="420.0" layoutY="700.0" onAction="#add" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: red;" text="下一个文件" />
-      <JFXButton layoutX="630.0" layoutY="700.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: red;" onAction="#mvhaokan" text="移动到好看" />
-      <JFXButton layoutX="840.0" layoutY="700.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: red;" onAction="#mvshiwa" text="移动到丝袜" />
+      <JFXButton layoutX="630.0" layoutY="700.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: red;" onAction="#mvhaokan" text="移动到h" />
+      <JFXButton layoutX="840.0" layoutY="700.0" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: red;" onAction="#mvshiwa" text="移动到s" />
       <JFXButton layoutX="1090.0" layoutY="700.0" onAction="#queryList" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: red;" text="刷新列表" />
       <Text fx:id="text" layoutX="567.0" layoutY="651.0" strokeType="OUTSIDE" strokeWidth="0.0" text="当前文件" textAlignment="CENTER" wrappingWidth="242.240234375">
          <font>

@@ -27,6 +27,7 @@ public class Lodding {
 		jfxSpinner.setLayoutY(300);
 		jfxSpinner.setLayoutX(600);
 		Platform.runLater(()->{
+			pane.getChildren().remove(jfxSpinner);
 			pane.getChildren().add(jfxSpinner);
 		});
 	}

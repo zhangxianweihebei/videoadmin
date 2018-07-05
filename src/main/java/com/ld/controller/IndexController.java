@@ -12,14 +12,13 @@
 package com.ld.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-
-import org.bytedeco.javacv.FrameGrabber.Exception;
 
 import com.jfoenix.controls.JFXListView;
 import com.ld.core.ImageExtraction;
@@ -39,6 +38,9 @@ import javafx.scene.text.Text;
  * @date: 2018年7月4日 下午6:33:16
  */
 public class IndexController {
+	
+	public static Image LoddingImage = new Image(IndexController.class.getResourceAsStream("/lodding.jpg"));
+
 
 	@FXML
 	JFXListView<String> fileList;
@@ -50,19 +52,22 @@ public class IndexController {
 	ImageView imageView_3;
 	@FXML
 	ImageView imageView_4;
-	
+
 	@FXML
 	Text text;
 
 	private int k=0;//计数器
 	static final String video = "mp4,3gp,avi,mkv,wmv,mpg,vob,flv,swf,mov,xv,rmvb";
 
-	private String sourceFile = "\\\\Nasf4642d\\公用\\500";
+	private String sourceFile = "D:\\aaaaaa";
 
-	ScheduledExecutorService service = Executors.newScheduledThreadPool(5);
+	ExecutorService service = Executors.newCachedThreadPool();
+
+	Thread exeThread;
 
 	private static List<File> dataList = new ArrayList<>();
 	public void queryList() {
+		close();
 		dataList.clear();
 		k=0;
 		getListFile(new File(sourceFile), dataList);
@@ -74,37 +79,45 @@ public class IndexController {
 	}
 
 	public void add() throws Exception, FileNotFoundException {
+		readImage();
 		k++;
 		k = k>=dataList.size()?0:k;
-		readImage();
 	}
 	public void del() throws Exception, FileNotFoundException {
 		k--;
 		k = k<=0 ? dataList.size():k;
 		readImage();
 	}
-	public void readImage() throws Exception, FileNotFoundException {
-		Lodding.build().show();		
-		new Thread(()->{
+	public synchronized void readImage() throws Exception, FileNotFoundException {
+		close();
+		Lodding.build().show();
+		exeThread = new Thread(()->{
 			try {
+				long start = System.currentTimeMillis();
+				System.out.println("开始:"+new Date());
 				File file = dataList.get(k);
-				text.setText("当前文件为:"+file.getName());
-				List<File> screenshots = new ImageExtraction().getScreenshots(file.getPath(), 2000,4000,6000,8000);
-				imageView_1.setImage(new Image(new FileInputStream(screenshots.get(0))));
-				imageView_2.setImage(new Image(new FileInputStream(screenshots.get(1))));
-				imageView_3.setImage(new Image(new FileInputStream(screenshots.get(2))));
-				imageView_4.setImage(new Image(new FileInputStream(screenshots.get(3))));
+				String mag = "当前文件为:"+file.getName();
+				text.setText(mag);
+				new ImageExtraction(imageView_1,imageView_2,imageView_3,imageView_4).getScreenshots(file, 100,300,600,1000);
 				Lodding.build().hide();
-			} catch (Exception | FileNotFoundException e) {
+				long end = System.currentTimeMillis();
+				mag+="--耗时: "+((start-end)/1000)+" 秒";
+				text.setText(mag);
+				System.out.println("结束:"+new Date());
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}).start();
+		});
+		exeThread.start();
 	}
+
 	public void mvhaokan() {
-		moveTotherFolders(dataList.get(k), new File("\\\\Nasf4642d\\公用\\aaa\\好看"));
+		close();
+		moveTotherFolders(dataList.get(k), new File("D:\\hhhhhhhhhhh"));
 	}
 	public void mvshiwa() {
-		moveTotherFolders(dataList.get(k), new File("\\\\Nasf4642d\\公用\\aaa\\丝袜"));
+		close();
+		moveTotherFolders(dataList.get(k), new File("D:\\sssssssssss"));
 	}
 
 	private void moveTotherFolders( File startFile,File tmpFile){
@@ -144,6 +157,26 @@ public class IndexController {
 				}
 			}
 			getListFile(f,dataList);
+		}
+	}
+
+	public void close() {
+		synchronized (dataList) {
+			if(exeThread != null) {//强制关闭之前请求
+				exeThread.stop();
+				exeThread = null;
+				System.gc();
+				System.out.println("关闭垃圾");
+			}
+			imageView_1.setImage(null);
+			imageView_2.setImage(null);
+			imageView_3.setImage(null);
+			imageView_4.setImage(null);
+			imageView_1.setImage(LoddingImage);
+			imageView_2.setImage(LoddingImage);
+			imageView_3.setImage(LoddingImage);
+			imageView_4.setImage(LoddingImage);
+			Lodding.build().hide();
 		}
 	}
 
